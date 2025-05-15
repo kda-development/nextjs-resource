@@ -106,8 +106,6 @@ Project Next.js bisa di-deploy dengan berbagai layanan seperti:
 
 ## 📄 License
 
-Silakan sesuaikan lisensi proyek ini. Contoh:
-
 ```
 GPL-3.0 license
 Copyright (c) 2025
