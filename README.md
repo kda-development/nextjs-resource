@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 📦 Next.js Project
 
-First, run the development server:
+Ini adalah proyek web yang dibangun menggunakan [Next.js](https://nextjs.org/), framework React modern untuk membuat aplikasi web dengan fitur server-side rendering, static site generation, dan API routes.
+
+---
+
+## ⚙️ Requirements
+
+Sebelum memulai, pastikan perangkat Anda telah terinstal:
+
+- **Node.js** >= 18.x  
+  [Download Node.js](https://nodejs.org/)
+- **npm** atau **yarn**  
+  - `npm` sudah termasuk saat instalasi Node.js
+  - (Opsional) Install yarn: `npm install -g yarn`
+- **Git** (untuk clone repository)  
+  [Download Git](https://git-scm.com/)
+
+---
+
+## 🚀 Getting Started
+
+Ikuti langkah berikut untuk menjalankan project secara lokal:
+
+### 1. Clone Repository
+
+```bash
+git clone https://token@github.com/kda-development/nextjs-resource.git
+cd nextjs-resource
+```
+
+### 2. Install Dependencies
+
+Dengan npm:
+
+```bash
+npm install
+```
+
+Atau dengan yarn:
+
+```bash
+yarn install
+```
+
+### 3. Jalankan Development Server
+
+Dengan npm:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Dengan yarn:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Buka browser dan kunjungi [http://localhost:3000](http://localhost:3000) untuk melihat hasilnya.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Struktur Proyek
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Struktur direktori umum proyek Next.js:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+/public            → Aset statis (gambar, favicon, dll)
+/src/app           → Halaman-halaman aplikasi
+/src/components    → Komponen UI yang bisa digunakan ulang
+/src/functions     → Komponen function yang bisa digunakan ulang
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔧 Build untuk Production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Untuk membuild dan menjalankan aplikasi production:
+
+```bash
+npm run build
+npm start
+```
+
+Atau dengan yarn:
+
+```bash
+yarn build
+yarn start
+```
+
+---
+
+## 🌐 Deployment
+
+Project Next.js bisa di-deploy dengan berbagai layanan seperti:
+
+- [Vercel](https://vercel.com) (rekomendasi resmi)
+- Netlify
+- DigitalOcean / VPS
+- Docker
+
+---
+
+## 📄 License
+
+Silakan sesuaikan lisensi proyek ini. Contoh:
+
+```
+GPL-3.0 license
+Copyright (c) 2025
+```
+
+---
+
+## 📫 Kontak
+
+Untuk pertanyaan atau kontribusi:
+
+- Email: [arfather26@gmail.com](mailto:arfather26@gmail.com)
+- GitHub Issues: [https://github.com/kda-development/nextjs-resource/issues](https://github.com/kda-development/nextjs-resource/issues)
