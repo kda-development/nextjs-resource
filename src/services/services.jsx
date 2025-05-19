@@ -8,6 +8,7 @@ const constan = {
   token: "appsname-token",
   profile: "appsname-profile",
   urlRefresh: "auth/refresh-token",
+  pathLogin: '/login'
 };
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = config.apiUrl;
@@ -21,7 +22,7 @@ const fnLogout = () => {
   localStorage.setItem(constan?.profile, "");
   Cookies.remove(constan?.token);
   Cookies.remove("is_secure");
-  window.location.replace("/login");
+  window.location.replace(constan?.pathLogin);
 };
 
 const setToken = (token) => {
