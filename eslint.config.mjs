@@ -43,6 +43,7 @@ export default defineConfig([
           tabWidth: 2,
           bracketSpacing: true,
           arrowParens: 'avoid',
+          endOfLine: 'auto',
         },
       ],
     },
