@@ -1,6 +1,6 @@
-export default function fnDecrypt(text, key = "abogoboga") {
+export default function fnDecrypt(text, key = 'abogoboga') {
   if (text) {
-    let result = "";
+    let result = '';
     key = key.toLowerCase();
     let keyIndex = 0;
 
@@ -27,6 +27,6 @@ export default function fnDecrypt(text, key = "abogoboga") {
 
     return JSON.parse(result);
   } else {
-    return "";
+    return '';
   }
 }

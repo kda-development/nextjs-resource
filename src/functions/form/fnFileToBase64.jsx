@@ -1,4 +1,4 @@
-const fnFiletoBase64 = (file) => {
+const fnFiletoBase64 = file => {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
 
@@ -8,7 +8,7 @@ const fnFiletoBase64 = (file) => {
       resolve(fileReader.result);
     };
 
-    fileReader.onerror = (error) => {
+    fileReader.onerror = error => {
       reject(error);
     };
   });

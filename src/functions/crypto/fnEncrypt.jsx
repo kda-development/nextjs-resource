@@ -1,7 +1,7 @@
-export default function fnEncrypt(params, key = "abogoboga") {
+export default function fnEncrypt(params, key = 'abogoboga') {
   if (params) {
     let text = JSON.stringify(params);
-    let result = "";
+    let result = '';
     key = key.toLowerCase();
     let keyIndex = 0;
 
@@ -28,6 +28,6 @@ export default function fnEncrypt(params, key = "abogoboga") {
 
     return result;
   } else {
-    return "";
+    return '';
   }
 }

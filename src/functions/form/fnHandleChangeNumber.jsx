@@ -5,17 +5,23 @@ function fnCheckmax(max, value, label) {
     return false;
   }
 }
-const fnHandleChangeNumber = (label, value, max, onInputChange, sliceDecimal = 8) => {
+const fnHandleChangeNumber = (
+  label,
+  value,
+  max,
+  onInputChange,
+  sliceDecimal = 8
+) => {
   let regex = /^[0-9.]+$/;
-  let params = value.replace(/,/g, "");
+  let params = value.replace(/,/g, '');
   if (params.match(regex)) {
-    let split = params.split(".");
+    let split = params.split('.');
     if (split.length > 1) {
       if (fnCheckmax(max, Number(split[0]), label)) {
         onInputChange(
           label,
-          split[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
-            "." +
+          split[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') +
+            '.' +
             split[1].slice(0, sliceDecimal)
         );
       }
@@ -23,13 +29,13 @@ const fnHandleChangeNumber = (label, value, max, onInputChange, sliceDecimal = 8
       if (fnCheckmax(max, Number(params), label)) {
         onInputChange(
           label,
-          params.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+          params.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
         );
       }
     }
   } else {
     if (!value) {
-      onInputChange(label, "");
+      onInputChange(label, '');
     }
   }
 };

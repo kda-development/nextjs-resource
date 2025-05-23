@@ -13,6 +13,15 @@ export default defineConfig([
       prettier: pluginPrettier,
     },
     languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      sourceType: 'module',
+      ecmaVersion: 'latest',
       globals: {
         ...globals.browser,
         ...globals.node,
@@ -21,7 +30,8 @@ export default defineConfig([
     rules: {
       // Menggabungkan semua rule dari react
       ...pluginReact.configs.recommended.rules,
-
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
       // Tambahkan rule prettier
       'prettier/prettier': [
         'error',

@@ -1,31 +1,29 @@
-/* eslint-disable no-undef */
-/* eslint-disable import/no-anonymous-default-export */
-import axios from "axios";
-import Cookies from "js-cookie";
-import config from "./index";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import config from './index';
 
 const constan = {
-  token: "appsname-token",
-  profile: "appsname-profile",
-  urlRefresh: "auth/refresh-token",
-  pathLogin: '/login'
+  token: 'appsname-token',
+  profile: 'appsname-profile',
+  urlRefresh: 'auth/refresh-token',
+  pathLogin: '/login',
 };
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = config.apiUrl;
-axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
+axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
 axiosInstance.defaults.headers.common.Authorization = `Bearer ${Cookies.get(
   constan?.token
 )}`;
 const pendingRequests = [];
 let isRefreshingToken = false;
 const fnLogout = () => {
-  localStorage.setItem(constan?.profile, "");
+  localStorage.setItem(constan?.profile, '');
   Cookies.remove(constan?.token);
-  Cookies.remove("is_secure");
+  Cookies.remove('is_secure');
   window.location.replace(constan?.pathLogin);
 };
 
-const setToken = (token) => {
+const setToken = token => {
   if (token) {
     Cookies.set(constan?.token, token);
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -35,8 +33,8 @@ const setToken = (token) => {
 };
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  response => response,
+  error => {
     if (error.response.status === 401) {
       if (!isRefreshingToken) {
         isRefreshingToken = true;
@@ -54,20 +52,20 @@ axiosInstance.interceptors.response.use(
                 },
               }
             )
-            .then((res) => {
+            .then(res => {
               const accessToken = res.data?.result?.token;
               Cookies.set(constan?.token, accessToken);
               setToken(accessToken);
               // Process pending requests and wire responses back through promise.
               if (pendingRequests.length > 0) {
-                pendingRequests.forEach((pendingRequest) => {
+                pendingRequests.forEach(pendingRequest => {
                   const updatedRequest = { ...pendingRequest.request };
 
                   updatedRequest.headers.Authorization = `Bearer ${accessToken}`;
 
                   axios(updatedRequest)
-                    .then((res) => pendingRequest.resolve(res))
-                    .catch((err) => pendingRequest.reject(err));
+                    .then(res => pendingRequest.resolve(res))
+                    .catch(err => pendingRequest.reject(err));
                 });
               }
 
@@ -80,17 +78,17 @@ axiosInstance.interceptors.response.use(
 
               return axios(updatedRequest);
             })
-            .catch((error) => {
-              console.error("error refresh", error);
+            .catch(error => {
+              console.error('error refresh', error);
               if (
                 error.response.data.message ===
-                  "Token could not be parsed from the request." ||
+                  'Token could not be parsed from the request.' ||
                 error.response.data.message ===
-                  "Token could not be parsed from the request." ||
+                  'Token could not be parsed from the request.' ||
                 error.response.data.message ===
-                  "Refresh token tidak ditemukan" ||
+                  'Refresh token tidak ditemukan' ||
                 error.response.data.message ===
-                  "The token has been blacklisted" ||
+                  'The token has been blacklisted' ||
                 error.response.status === 401
               ) {
                 fnLogout();
@@ -103,7 +101,7 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(error);
         }
       } else {
-        console.error("interceptors.isRefreshingToken: true");
+        console.error('interceptors.isRefreshingToken: true');
         return new Promise((resolve, reject) => {
           pendingRequests.push({
             resolve,
@@ -116,40 +114,40 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-const defaultPrefix = "";
+const defaultPrefix = '';
 
 export default {
   get: (url, params, prefix) =>
     axiosInstance({
-      method: "get",
+      method: 'get',
       url: `${prefix || defaultPrefix}${url}`,
       params,
     }),
   post: (url, data, params, prefix) =>
     axiosInstance({
-      method: "post",
+      method: 'post',
       url: `${prefix || defaultPrefix}${url}`,
       data,
       params,
     }),
   put: (url, data, params, prefix) =>
     axiosInstance({
-      method: "put",
+      method: 'put',
       url: `${prefix || defaultPrefix}${url}`,
       data,
       params,
     }),
   delete: (url, data, params, prefix) =>
     axiosInstance({
-      method: "delete",
+      method: 'delete',
       url: `${prefix || defaultPrefix}${url}`,
       data,
       params,
     }),
   download: (url, data, params, prefix) =>
     axiosInstance({
-      method: "post",
-      responseType: "blob",
+      method: 'post',
+      responseType: 'blob',
       url: `${prefix || defaultPrefix}${url}`,
       data,
       params,
