@@ -31,12 +31,12 @@ const colorMap = {
 };
 
 const sizeMap = {
-  xs: "px-2 py-1 text-xs",
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2 text-base",
-  lg: "px-5 py-2.5 text-lg",
-  xl: "px-6 py-3 text-xl",
-  full: "w-full px-4 py-2 text-base",
+  xs: "text-xs h-7 px-2",
+  sm: "text-sm h-8 px-3",
+  md: "text-base h-10 px-3",
+  lg: "text-lg h-11 px-4",
+  xl: "text-xl h-12 px-5",
+  full: "w-full text-base h-10 px-4",
 };
 
 const roundedMap = {
@@ -54,43 +54,61 @@ const variantMap = {
   standard: "border-b",
 };
 
-export default function CompInputText({
-  children,
-  color = "primary", // primary, secondary, error, warning, success
-  type = "text", // text, password, email,
+const CompInputText = ({
+  color = "primary",
+  type = "text",
   size = "full",
   rounded = "md",
   className = "",
-  adorment = null, // start, end
-  variant = "outlined", // outlined, filled, standard
+  adornment = null, // { start, end }
+  variant = "outlined",
   ...props
-}) {
+}) => {
   const colorSet = colorMap[color] || colorMap.primary;
-  const styleClasses = clsx(
-    `tracking-wide focus:outline-none transition-all duration-150 ${variantMap[variant]}`,
+
+  const inputPadding = clsx({
+    "pl-10": adornment?.start,
+    "pr-10": adornment?.end,
+  });
+
+  const inputClasses = clsx(
+    `tracking-wide focus:outline-none transition-all duration-150 w-full ${variantMap[variant]}`,
     sizeMap[size],
     variant !== "standard" && roundedMap[rounded],
     {
-      [colorSet.bg]: color === "primary" && variant === "filled",
-      [colorSet.text]: color === "primary" && variant === "filled",
+      [colorSet.bg]: variant === "filled",
+      [colorSet.text]: variant === "filled",
       "bg-transparent": variant !== "filled" || color === "transparent",
-      [colorSet.border]: variant === "outlined" || variant === "standard", // 👈 FIXED
+      [colorSet.border]: variant === "outlined" || variant === "standard",
       "border-transparent": variant === "filled",
     },
+    inputPadding,
   );
 
   return (
-    <motion.input
-      type={type}
-      whileFocus={{ scale: 1.02 }}
-      whileTap={{ scale: 0.95 }}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.1, ease: "easeOut" }}
-      className={styleClasses}
-      {...props}
-    >
-      {children}
-    </motion.input>
+    <div className={`relative w-full ${className}`}>
+      {adornment?.start && (
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+          {adornment.start}
+        </div>
+      )}
+      <motion.input
+        type={type}
+        whileFocus={{ scale: 1.02 }}
+        whileTap={{ scale: 0.95 }}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.1, ease: "easeOut" }}
+        className={inputClasses}
+        {...props}
+      />
+      {adornment?.end && (
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
+          {adornment.end}
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default CompInputText;
